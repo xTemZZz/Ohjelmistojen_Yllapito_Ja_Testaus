@@ -1,0 +1,108 @@
+<h1>Unit Testing Projekti</h1>
+<h2>📋 Projektin kuvaus</h2>
+<p>I Markdown & HTML <strong>käytetty tehtävän 2 README.md</strong></p>
+<hr>
+<h2>📁 Tiedostojen rakenne</h2>
+<h3><code>mylib.js</code> - Funktioiden kirjasto</h3>
+<ul>
+<li><strong><code>add(a, b)</code></strong> - Laskee kahden luvun summan</li>
+<li><strong><code>sub(a, b)</code></strong> - Laskee kahden luvun erotuksen</li>
+<li><strong><code>multiply(a, b)</code></strong> - Laskee kahden luvun tulon</li>
+<li><strong><code>divide(a, b)</code></strong> - Laskee kahden luvun osamäärän (heittää virheen jos jakaja on 0)</li>
+</ul>
+<p><strong>Koodi:</strong></p>
+<pre><code class="language-javascript">function add(a, b){
+    return a + b;
+}
+
+function sub(a,b){
+    return a - b;
+}
+
+function multiply(a,b){
+    return a * b;
+}
+
+function divide(a,b){
+    if (b === 0 ){
+        throw new Error (&quot;Divisor 0 Error!&quot;);
+    }
+    return a / b;
+}
+
+module.exports = {add, sub, multiply, divide};
+</code></pre>
+<h3><code>main.js</code> - Pääohjelma</h3>
+<p>Tuodaan funktiot <code>mylib.js</code>:stä ja testataan niitä.</p>
+<p><strong>Koodi:</strong></p>
+<pre><code class="language-javascript">const {add, sub, divide, multiply }  = require(&quot;./mylib.js&quot;);
+
+function main() {
+    console.log(`1 + 2 = ${add(1,2)}`);
+    console.log(`7 - 5 = ${sub(7,5)}`);
+    console.log(`8 / 4 = ${divide(8,4)}`);
+    console.log(`6 * 6 = ${multiply(6,6)}`);
+};
+
+if (require.main === module){
+    main();
+}
+</code></pre>
+<p><strong>Tuloste:</strong></p>
+<pre><code>1 + 2 = 3
+7 - 5 = 2
+8 / 4 = 2
+6 * 6 = 36
+</code></pre>
+<h3><code>__test__/mylib.test.js</code> - Yksikkötestit</h3>
+<p>Sisältää testit kaikille funktioille <strong>Mocha</strong> ja <strong>Chai</strong> -kirjastoilla.</p>
+<p><strong>Koodi:</strong></p>
+<pre><code class="language-javascript">const { expect } = require(&quot;chai&quot;);
+const {add, sub, divide, multiply }  = require(&quot;../mylib.js&quot;);
+
+describe(&quot;mylib.js functions \n&quot;, function () {
+
+    before(function () {
+        console.log(&quot;Starting test suite.&quot;)
+    });
+
+    after(function () {
+        console.log(&quot;Finished test suite.&quot;)
+    })
+  describe(&quot;add()&quot;, function () {
+    it(&quot;add should return correct sum&quot;, function () {
+      expect(add(2,6)).to.equal(8);
+    });
+  });
+
+  describe(&quot;#sub()&quot;, function () {
+    it(&quot;sub should return correct difference&quot;, function () {
+        expect(sub(7,3)).to.equal(4);
+    })
+  });
+
+  describe(&quot;#multiply()&quot;, function (){
+    it(&quot;multiply should return corrrect product&quot;, function() {
+        expect(multiply(5,5)).to.equal(25);
+    });
+  })
+
+  describe(&quot;#divide()&quot;, function () {
+    it(&quot;divide should throw error on zero divisor&quot;, function () {
+        expect(() =&gt; divide(10,0)).to.throw(&quot;Divisor 0 Error!&quot;);
+    });
+    it(&quot;divide should return corret quotient&quot;, function () {
+        expect(divide(8,4)).to.equal(2);
+    })
+  })
+});
+</code></pre>
+<hr>
+<h2>🚀 Käyttöohjeet</h2>
+<h3>1. Pääohjelman ajaminen</h3>
+<pre><code class="language-bash">node main.js
+</code></pre>
+<h3>2. Testien ajaminen</h3>
+<pre><code class="language-bash">npm test
+</code></pre>
+<hr>
