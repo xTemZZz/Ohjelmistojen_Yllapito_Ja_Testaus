@@ -1,0 +1,19 @@
+{
+  "name": "unit_testing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "directories": {
+    "test": "__test__"
+  },
+  "scripts": {
+    "test": "mocha __test__"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^6.2.2",
+    "mocha": "^11.7.5"
+  }
+}
