@@ -63,7 +63,7 @@ logger.error('This is another error message.');
 
 ### `__test__/logger.test.js` – Testit Mocha & Chai
 
-Tried to make test to read filesystem data, couldn't do it. :(
+Yritin luoda testejä filesystemiinm ei onnistunut ja aika loppui kesken. :(
 
 ---
 
