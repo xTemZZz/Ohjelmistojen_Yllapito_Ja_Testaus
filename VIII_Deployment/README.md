@@ -19,16 +19,17 @@ Projektin tavoitteena oli:
 ```
 VIII_Deployment/
 ├─ __test__/
-│  ├─ test1.js
-│  ├─ test2.js
-│  └─ test3.js
-│  └─ testN.js
+│  ├─ add.test.js
+│  ├─ at.test.js
+│  └─ camelCase.test.js
+│  └─...
+│  └─ words.test.js
 ├─ coverage/
 ├─ node_modules/
 ├─ src/
-│  ├─ module1.js
-│  ├─ module2.js
-│  ├─ module3.js
+│  ├─ add.js
+│  ├─ at.js
+│  ├─ camelCase.js
 │  └─ ...
 │  └─ .internal/      * Ei vaikuta koodin testauksen kattavuuteen
 ├─ .gitignore
