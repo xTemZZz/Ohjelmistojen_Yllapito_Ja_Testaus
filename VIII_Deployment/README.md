@@ -1,4 +1,4 @@
-# Unit Testing Projekti
+# VIII_Deployment
 
 [![Coverage Status](https://coveralls.io/repos/github/xTemZZz/Ohjelmistojen_Yllapito_Ja_Testaus/badge.svg?branch=main)](https://coveralls.io/github/xTemZZz/Ohjelmistojen_Yllapito_Ja_Testaus/?branch=main)
 
@@ -38,3 +38,30 @@ VIII_Deployment/
 ├─ package-lock.json
 ├─ package.json
 └─ README.md
+
+.
+│
+├── img/                 # Screenshots for documentation
+│
+├── src/                 # Library functions
+│   ├── add.js
+│   ├── at.js
+│   ├── camelCase.js
+│   ├── ...
+│   ├── LICENSE
+│   └── .internal/       # Internal helper functions (not tested directly)
+│
+├── test/                # Unit tests
+│   ├── add.test.js
+│   ├── at.test.js
+│   ├── camelCase.test.js
+│   ├── ...
+│
+├── .github/
+│   └── workflows/
+│       └── test.yml    # GitHub Actions pipeline
+│
+├── LICENSE
+├── package-lock.json
+├── package.json
+└── README.md           # Documentation           
