@@ -1,4 +1,4 @@
-# slice
+# toString
 ## Yhteenveto / Summary
 > slice()- funktio ei toiminut chunk()- funktion kanssa. Syynä, että slice saattoi palauttaa liian pitkiä listoja (end-arvo liian suuri suhteessa todelliseen listan pituuteen). 
 
