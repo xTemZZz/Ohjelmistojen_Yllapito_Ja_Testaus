@@ -16,6 +16,7 @@ Projektin tavoitteena oli:
 ---
 
 ## 📁 Tiedostojen rakenne
+```
 VIII_Deployment/
 ├─ __test__/
 │  ├─ test1.js
@@ -28,40 +29,38 @@ VIII_Deployment/
 │  ├─ module1.js
 │  ├─ module2.js
 │  ├─ module3.js
-│  └─ moduleN.js
-│  └─ .internal/
-│      ├─ helper1.js
-│      └─ helper2.js
-│      └─ helperN.js
+│  └─ ...
+│  └─ .internal/      * Ei vaikuta koodin testauksen kattavuuteen
 ├─ .gitignore
 ├─ LICENSE
 ├─ package-lock.json
 ├─ package.json
 └─ README.md
+```
 
-.
-│
-├── img/                 # Screenshots for documentation
-│
-├── src/                 # Library functions
-│   ├── add.js
-│   ├── at.js
-│   ├── camelCase.js
-│   ├── ...
-│   ├── LICENSE
-│   └── .internal/       # Internal helper functions (not tested directly)
-│
-├── test/                # Unit tests
-│   ├── add.test.js
-│   ├── at.test.js
-│   ├── camelCase.test.js
-│   ├── ...
-│
-├── .github/
-│   └── workflows/
-│       └── test.yml    # GitHub Actions pipeline
-│
-├── LICENSE
-├── package-lock.json
-├── package.json
-└── README.md           # Documentation           
+## 🚀 Käyttöohjeet
+
+### 1. Riippuvuuksien asentaminen
+
+```bash
+npm install
+```
+Node v22.18.0
+npm 10.9.3
+c8 11.0.0
+chai 6.2.2
+mocha 11.7.5
+
+### 2. Testien suorittaminen
+
+```bash
+npm test
+```
+
+### 3. Koodin kattavuuden ajo
+
+```bash
+npm run coverage
+```
+
+     
