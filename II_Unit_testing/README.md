@@ -127,3 +127,10 @@ npm test
 ```
 
 ---
+
+📄 Lisenssi
+
+Copyright 2026 Teemu Martikainen
+
+Tämä projekti on lisensoitu Apache License 2.0 -lisensillä.
+Katso LICENSE-tiedostosta koko lisenssiteksti.

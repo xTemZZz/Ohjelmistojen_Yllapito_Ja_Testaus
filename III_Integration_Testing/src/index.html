@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RGB ⇄ HEX Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .converter-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e8f5e9;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .error {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+        .color-preview {
+            width: 50px;
+            height: 50px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>RGB ⇄ HEX Converter</h1>
+        
+        <!-- HEX to RGB -->
+        <div class="converter-section" id="hex-to-rgb">
+            <h2>HEX to RGB</h2>
+            <div class="form-group">
+                <label for="hex-input">HEX value (e.g., #FF0000 or FF0000):</label>
+                <input type="text" id="hex-input" placeholder="#FF0000">
+            </div>
+            <button onclick="convertHexToRgb()" id="convert-hex-btn">Convert to RGB</button>
+            <button onclick="clearHexResult()" id="clear-hex-btn">Clear</button>
+            <div id="hex-result" class="result"></div>
+            <div id="hex-error" class="error" style="display: none;"></div>
+            <div id="hex-color-preview" class="color-preview" style="display: none;"></div>
+        </div>
+
+        <!-- RGB to HEX -->
+        <div class="converter-section" id="rgb-to-hex">
+            <h2>RGB to HEX</h2>
+            <div class="form-group">
+                <label for="red-input">Red (0-255):</label>
+                <input type="number" id="red-input" min="0" max="255" placeholder="255">
+            </div>
+            <div class="form-group">
+                <label for="green-input">Green (0-255):</label>
+                <input type="number" id="green-input" min="0" max="255" placeholder="0">
+            </div>
+            <div class="form-group">
+                <label for="blue-input">Blue (0-255):</label>
+                <input type="number" id="blue-input" min="0" max="255" placeholder="0">
+            </div>
+            <button onclick="convertRgbToHex()" id="convert-rgb-btn">Convert to HEX</button>
+            <button onclick="clearRgbResult()" id="clear-rgb-btn">Clear</button>
+            <div id="rgb-result" class="result"></div>
+            <div id="rgb-error" class="error" style="display: none;"></div>
+            <div id="rgb-color-preview" class="color-preview" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://127.0.0.1:3000';
+
+        async function convertHexToRgb() {
+            const hexInput = document.getElementById('hex-input').value;
+            const resultDiv = document.getElementById('hex-result');
+            const errorDiv = document.getElementById('hex-error');
+            const colorPreview = document.getElementById('hex-color-preview');
+            
+            try {
+                const response = await fetch(`${API_URL}/hexToRGB?hex=${encodeURIComponent(hexInput)}`);
+                const data = await response.json();
+                console.log(data)
+                if (!response.ok) {
+                    throw new Error(data.error || 'Invalid HEX value');
+                }
+                
+                resultDiv.innerHTML = `RGB: rgb(${data.red}, ${data.green}, ${data.blue})`;
+                resultDiv.style.display = 'block';
+                errorDiv.style.display = 'none';
+                
+                // Show color preview
+                colorPreview.style.backgroundColor = `rgb(${data.red}, ${data.green}, ${data.blue})`;
+                colorPreview.style.display = 'block';
+            } catch (error) {
+                errorDiv.textContent = `Error: ${error.message}`;
+                errorDiv.style.display = 'block';
+                resultDiv.style.display = 'none';
+                colorPreview.style.display = 'none';
+            }
+        }
+
+        async function convertRgbToHex() {
+            const red = document.getElementById('red-input').value;
+            const green = document.getElementById('green-input').value;
+            const blue = document.getElementById('blue-input').value;
+            const resultDiv = document.getElementById('rgb-result');
+            const errorDiv = document.getElementById('rgb-error');
+            const colorPreview = document.getElementById('rgb-color-preview');
+            
+            try {
+                // RGB to HEX - you'll need to add this endpoint to your server
+                const response = await fetch(`${API_URL}/rgbToHEX?r=${red}&g=${green}&b=${blue}`);
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(data.error || 'Invalid RGB values');
+                }
+                
+                resultDiv.innerHTML = `HEX: ${data.hex}`;
+                resultDiv.style.display = 'block';
+                errorDiv.style.display = 'none';
+                
+                // Show color preview
+                colorPreview.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+                colorPreview.style.display = 'block';
+            } catch (error) {
+                errorDiv.textContent = `Error: ${error.message}`;
+                errorDiv.style.display = 'block';
+                resultDiv.style.style = 'none';
+                colorPreview.style.display = 'none';
+            }
+        }
+
+        function clearHexResult() {
+            document.getElementById('hex-input').value = '';
+            document.getElementById('hex-result').style.display = 'none';
+            document.getElementById('hex-error').style.display = 'none';
+            document.getElementById('hex-color-preview').style.display = 'none';
+        }
+
+        function clearRgbResult() {
+            document.getElementById('red-input').value = '';
+            document.getElementById('green-input').value = '';
+            document.getElementById('blue-input').value = '';
+            document.getElementById('rgb-result').style.display = 'none';
+            document.getElementById('rgb-error').style.display = 'none';
+            document.getElementById('rgb-color-preview').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
