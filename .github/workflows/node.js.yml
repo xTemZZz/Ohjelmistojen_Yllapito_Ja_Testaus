@@ -37,4 +37,4 @@ jobs:
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
         working-directory: VIII_Deployment
-        run: npm run coveralls
+        run: npx coveralls < coverage/lcov.info
