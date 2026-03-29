@@ -26,7 +26,9 @@
 > 25 / 5 --> 1
 
 ## Liitteet / Attachments
+### Original
 ![Original](image-12.png)
+### Fixed
 ![Fix](image-13.png)
 ## Ympäristö / Environment
 - Käyttöjärjestelmä / OS:  Windows 11

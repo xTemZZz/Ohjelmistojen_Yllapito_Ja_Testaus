@@ -24,7 +24,9 @@
 > ['d', undefined, undefined]
 
 ## Liitteet / Attachments
+### Original
 ![Original](image-14.png)
+### Fixed
 ![Fix](image-15.png)
 ## Ympäristö / Environment
 - Käyttöjärjestelmä / OS:  Windows 11

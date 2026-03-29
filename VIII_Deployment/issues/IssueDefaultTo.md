@@ -25,7 +25,9 @@
 > 'NaN'
 
 ## Liitteet / Attachments
+### Original
 ![Original](image-10.png)
+### Fixed
 ![Fix](image-11.png)
 
 ## Ympäristö / Environment

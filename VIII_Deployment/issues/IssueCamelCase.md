@@ -24,7 +24,9 @@
 > ' fooBar'
 
 ## Liitteet / Attachments
+### Original
 ![Original](image.png)
+### Fixed
 ![Fixed](image-1.png)
 
 ## Ympäristö / Environment

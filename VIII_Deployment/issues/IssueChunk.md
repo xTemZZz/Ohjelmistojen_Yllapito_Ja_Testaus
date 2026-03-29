@@ -25,7 +25,9 @@
 > '['a' 'b'], ['b', 'c'], ['c', 'd'] ['d']
 
 ## Liitteet / Attachments
+### Original
 ![Original](image-4.png)
+### Fixed
 ![Fix](image-5.png)
 
 ## Ympäristö / Environment

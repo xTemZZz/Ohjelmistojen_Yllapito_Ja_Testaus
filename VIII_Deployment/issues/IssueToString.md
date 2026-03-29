@@ -1,6 +1,6 @@
-# slice
+# toString
 ## Yhteenveto / Summary
-> slice()- funktio ei toiminut chunk()- funktion kanssa. Syynä, että slice saattoi palauttaa liian pitkiä listoja (end-arvo liian suuri suhteessa todelliseen listan pituuteen). 
+> toString() -funktion olisi pitänyt palauttaa null-parametrilla tyhjä arvo. Palautti 'null'
 
 ## Tyyppi / Type
 - [X] Bugi / Bug
@@ -10,22 +10,26 @@
 
 ## Vakavuus / Severity
 - [ ] ❌ Kriittinen / Critical
-- [X] ⚠️ Vakava / Major
-- [ ] ⚪ Vähäinen / Minor
+- [ ] ⚠️ Vakava / Major
+- [X] ⚪ Vähäinen / Minor
 
 ## Korjaus / Fix
-> Lisättiin vertailu if (end > length) {
->    end = length
+> Koodiin lisätty ehtolause:
+> if (value === null) {
+>    return '';
 >  }
+
 **Odotettu tulos / Expected Result:**  
->  ['d']
+>  ''
 
 **Todellinen tulos / Actual Result:**  
-> ['d', undefined, undefined]
+> 'null'
 
 ## Liitteet / Attachments
-![Original](image-14.png)
-![Fix](image-15.png)
+### Original
+![Original](image-16.png)
+### Fixed
+![Fix](image-17.png)
 ## Ympäristö / Environment
 - Käyttöjärjestelmä / OS:  Windows 11
 

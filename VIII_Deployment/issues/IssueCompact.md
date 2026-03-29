@@ -25,8 +25,10 @@
 > '[2, 3]'
 
 ## Liitteet / Attachments
-![Original](image-4.png)
-![Fix](image-5.png)
+### Original
+![Original](image-6.png)
+### Fixed
+![Fix](image-7.png)
 
 ## Ympäristö / Environment
 - Käyttöjärjestelmä / OS:  Windows 11

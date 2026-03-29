@@ -25,7 +25,9 @@
 > '{ 'true': 1, 'false': 0 }'
 
 ## Liitteet / Attachments
+### Original
 ![Original](image-8.png)
+### Fixed
 ![Fix](image-9.png)
 
 ## Ympäristö / Environment

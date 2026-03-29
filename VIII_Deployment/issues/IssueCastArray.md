@@ -24,7 +24,9 @@
 > ' [undefined]'
 
 ## Liitteet / Attachments
+### Original
 ![Original](image-2.png)
+### Fixed
 ![Fix](image-3.png)
 
 ## Ympäristö / Environment
