@@ -26,9 +26,11 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
+        working-directory: VIII_Deployment
         run: npm install
 
       - name: Run tests and generate coverage
+        working-directory: working-directory: VIII_Deployment
         run: npm run coverage
 
       - name: Send coverage to Coveralls
