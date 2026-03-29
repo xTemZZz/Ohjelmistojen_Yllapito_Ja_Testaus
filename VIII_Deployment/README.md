@@ -13,12 +13,7 @@ Projektin tavoitteena oli:
 3. Toteuttaa GitHub Actions workflow, joka ajaa testit automaattisesti.  
 4. Integroida kattavuusraportointi Coverallsiin.
 5. Dokumentoida toteutus ja raportoida mahdolliset virheet  
-
 ---
-## Lähestymistapa ja toteutus
-
-# Testauksen suunnittelu
-Testaus aloitettiin tarkastelemalla annettua kirjastoa. 
 
 ## Tiedostojen rakenne
 ```
@@ -43,28 +38,15 @@ VIII_Deployment/
 └─ README.md
 ```
 
-
-## GitHub Actions
 ---
-<img width="890" height="815" alt="image" src="https://github.com/user-attachments/assets/324e8940-c88f-4917-8f65-5033f396aae0" />
 
-CI putki on toteutettu projektissa github actionsilla. 
+## Lähestymistapa ja toteutus
 
-workflow_dispatch - testausta varten lisätty, voi ajaa actionsin ilman push / pull
-Actions aktivoituu ainoastaan VIII_deployment kohdistuviin pull ja push requesteihin
-Valittiin ubuntu 24.04 koska se on uusin LTS
-node versioksi otettiin uusin 24.x versio
-actions/checkout uusin v5
+### Testauksen suunnittelu
+Testaus aloitettiin analysoimalla kirjaston rakenne ja sen tarjoamat funktiot, tavoitteena saada koodin testikattavuus yli 60 %. Projektissa suunniteltiin testit jokaiselle moduulille, huomioiden sekä normaali- että virhetilanteet. .internal-kansio jätettiin testauksesta pois tehtävänannon mukaisesti, koska se on tarkoitettu vain kirjaston sisäiseen käyttöön.
 
-askeleet: 
-- Asennetaan riippuvuudet, erikseen määritelty, että tapahtuu VIII_Deployment kansiossa komennolla npm install
-- Käydään testit ja coverage läpi komennolla npm run coverage
-- Lähetetään kattavuusraportti Coverallsille
-
-
----
-## Testaus 
-Listassa alla on testatutut funktiot, niiden testit, oliko kirjasto ehjä ladatessa, jos ei mikä bugi niissä oli
+### Testaus 
+Alla on luettelo testatuista funktioista, niiden vastaavista testitiedostoista, sekä tieto siitä, toimiiko kirjasto ladattaessa. Mikäli kirjasto ei toiminut odotetusti, taulukossa on myös linkki löydettyyn bugiin
 
 | FUNKTIO | TESTI | TOIMIVUUS | ISSUE REPORT |   KORJATTU | 
 |----------|--------------|--------------|-----------------|-----------------|
@@ -112,6 +94,38 @@ Listassa alla on testatutut funktiot, niiden testit, oliko kirjasto ehjä ladate
 | [upperFirst.js](https://github.com/xTemZZz/Ohjelmistojen_Yllapito_Ja_Testaus/blob/main/VIII_Deployment/src/upperFirst.js) | [upperFirst.test.js](https://github.com/xTemZZz/Ohjelmistojen_Yllapito_Ja_Testaus/blob/main/VIII_Deployment/__test__/upperFirst.test.js) | ❌ | [issueToString](https://github.com/xTemZZz/Ohjelmistojen_Yllapito_Ja_Testaus/blob/main/VIII_Deployment/issues/IssueToString.md) | ✔️ |
 | [words.js](https://github.com/xTemZZz/Ohjelmistojen_Yllapito_Ja_Testaus/blob/main/VIII_Deployment/src/words.js) | [words.test.js](https://github.com/xTemZZz/Ohjelmistojen_Yllapito_Ja_Testaus/blob/main/VIII_Deployment/__test__/words.test.js) | ✔️ | 
 
+### Testauksen tulokset 98% coverage
+
+Testien suorittamisen jälkeen saavutettiin yli 60 % testikattavuus, kun .internal-kansio jätettiin pois. Alla on yhteenveto testatuista ja testaamattomista tiedostoista sekä mahdollisista löydetyistä ongelmista:
+
+Testatut tiedostot: kaikki kirjaston mukana tulleet tiedostot. isBuffer() testit on skipattu, samoin keys()-funktion testi string-arvoilla.
+Testaamatta jätetyt tiedostot: .internal/ -kansion sisältö
+Löydetyt ongelmat ja issue-raportit on dokumentoitu ylläolevassa listassa.
+Suurin osa issueista on korjattu testauksen aikana, mutta esimerkiksi defaultToAny.js ja keys.js sisältävät vielä avoimia ongelmia.
+
+---
+
+## GitHub Actions
+---
+<img width="890" height="815" alt="image" src="https://github.com/user-attachments/assets/324e8940-c88f-4917-8f65-5033f396aae0" />
+
+CI-putki on toteutettu GitHub Actionsilla. Workflow on määritelty siten, että sen voi tarvittaessa käynnistää manuaalisesti (workflow_dispatch), eli testi voidaan ajaa myös ilman push- tai pull-request-tapahtumaa. Varsinainen automaatio aktivoituu ainoastaan VIII_Deployment-kansion muutoksia koskevissa push- ja pull-requesteissa.
+
+Workflow käyttää seuraavia asetuksia:
+
+Käyttöjärjestelmä: Ubuntu 24.04 (uusin LTS) (OPETTAJAN TOIVOMUKSEN MUKAISESTI)
+Node.js-versio: 24.x (uusin saatavilla oleva versio)
+actions/checkout: versio v5
+
+---
+## Päätelmä
+
+Alkuperäinen kirjasto ei ollut täysin valmis tuotantoon. Testauksen aikana löytyi sekä kriittisiä että vähemmän kriittisiä virheitä useista moduuleista, joten kaikki toiminnot eivät olleet täysin luotettavia. 
+
+Vaikka testit kattoivat koodin laajasti, ne eivät silti todennäköisesti paljasta kaikkia mahdollisia virheitä, joita kirjasto voi sisältää erilaisissa käyttötapauksissa. Suurin osa löydetyistä bugeista on kuitenkin nyt korjattu, mikä parantaa kirjaston luotettavuutta. Korjausten jälkeen kirjastoa voi käyttää ainakin osittain tuotannossa tai sisäisessä kehitystyössä, mutta ennen laajempaa käyttöönottoa kannattaa vielä lisätä testejä ja seurata mahdollisia uusia virheitä.
+
+Kirjasto tarjoaa toimintoja, joita voi hyödyntää rajatusti tuotannossa, mutta sen käyttöön liittyy edelleen riskejä, jotka on hyvä huomioida kehityksessä.
+---
 
 ##  Käyttöohjeet
 
