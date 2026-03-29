@@ -2,20 +2,25 @@
 
 [![Coverage Status](https://coveralls.io/repos/github/xTemZZz/Ohjelmistojen_Yllapito_Ja_Testaus/badge.svg?branch=main)](https://coveralls.io/github/xTemZZz/Ohjelmistojen_Yllapito_Ja_Testaus/?branch=main)
 
-## 📋 Projektin kuvaus
+## Projektin kuvaus
 
-Tässä projektissa toteutettiin yksikkötestaus **Mocha** ja **Chai** -kirjastoilla Node.js -projektissa. Testattavana oli `mylib.js`-tiedosto joka sisälsi funktioita eri käyttötarkoituksiin - tekstinmuokkaamisesta laskutoimituksiin.
+Tässä projektissa toteutettiin yksikkötestaus **Mocha** ja **Chai** -kirjastoilla Node.js -projektissa. Testattavana oli `AT00BY10`-kirjasto joka sisälsi funktioita eri käyttötarkoituksiin - tekstinmuokkaamisesta laskutoimituksiin. ( [Alkuperäinen kirjasto](https://github.com/petri-rantanen/AT00BY10))
 
 Projektin tavoitteena oli:
 
-1. Kirjoittaa yksikkötestit kaikille funktioille.  
-2. Saada vähintään 60 % testikattavuus.  
+1. Kirjoittaa yksikkötestit kirjastolle.  
+2. Saada vähintään 60 % testikattavuus (ei pidä sisällään .internal -kansiota).  
 3. Toteuttaa GitHub Actions workflow, joka ajaa testit automaattisesti.  
-4. Lähettää kattavuusraportti Coverallsiin ja lisätä badge GitHub-repositoryyn.  
+4. Integroida kattavuusraportointi Coverallsiin.
+5. Dokumentoida toteutus ja raportoida mahdolliset virheet  
 
 ---
+## Lähestymistapa ja toteutus
 
-## 📁 Tiedostojen rakenne
+# Testauksen suunnittelu
+Testaus aloitettiin tarkastelemalla annettua kirjastoa. 
+
+## Tiedostojen rakenne
 ```
 VIII_Deployment/
 ├─ __test__/
@@ -38,7 +43,36 @@ VIII_Deployment/
 └─ README.md
 ```
 
-## 🚀 Käyttöohjeet
+
+## GitHub Actions
+---
+<img width="890" height="815" alt="image" src="https://github.com/user-attachments/assets/324e8940-c88f-4917-8f65-5033f396aae0" />
+
+CI putki on toteutettu projektissa github actionsilla. 
+
+workflow_dispatch - testausta varten lisätty, voi ajaa actionsin ilman push / pull
+Actions aktivoituu ainoastaan VIII_deployment kohdistuviin pull ja push requesteihin
+Valittiin ubuntu 24.04 koska se on uusin LTS
+node versioksi otettiin uusin 24.x versio
+actions/checkout uusin v5
+
+askeleet: 
+- Asennetaan riippuvuudet, erikseen määritelty, että tapahtuu VIII_Deployment kansiossa komennolla npm install
+- Käydään testit ja coverage läpi komennolla npm run coverage
+- Lähetetään kattavuusraportti Coverallsille
+
+
+---
+## Testaus 
+| FUNKTIO | TESTI | STATUS        |  KRIITTINEN       |
+|----------|--------------|--------------|-----------------|
+| [add.js](https://github.com/xTemZZz/Ohjelmistojen_Yllapito_Ja_Testaus/blob/main/VIII_Deployment/src/add.js) | | ❌ Critical | 🔥 Fix immediately |
+| [at.js](https://github.com/xTemZZz/Ohjelmistojen_Yllapito_Ja_Testaus/blob/main/VIII_Deployment/src/at.js) | | ❌ Critical | 🔥 Fix immediately |
+| [camelCase.js](https://github.com/xTemZZz/Ohjelmistojen_Yllapito_Ja_Testaus/blob/main/VIII_Deployment/src/camelCase.js) | | ❌ Critical | 🔥 Fix immediately |
+| [at.js](https://github.com/xTemZZz/Ohjelmistojen_Yllapito_Ja_Testaus/blob/main/VIII_Deployment/src/at.js) | ⚠️ Minor   | ⏳ Fix later     |
+| add | ✅ OK | - |
+
+##  Käyttöohjeet
 
 ### 1. Riippuvuuksien asentaminen
 
@@ -48,19 +82,19 @@ npm install
 - Node v22.18.0
 - npm 10.9.3
 - c8 11.0.0
-- chai 6.2.2
-- mocha 11.7.5
+- Chai 6.2.2
+- Mocha 11.7.5
 
-### 2. Testien suorittaminen
+### 2.1 Testien suorittaminen ilman coveragea
 
 ```bash
 npm test
 ```
 
-### 3. Koodin kattavuuden ajo
+### 2.2 Testien suorittaminen kattavuuden kanssa
 
 ```bash
 npm run coverage
 ```
 
-     
+---
