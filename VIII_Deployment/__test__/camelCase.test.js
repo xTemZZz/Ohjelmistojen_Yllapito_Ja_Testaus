@@ -1,9 +1,11 @@
 import { expect } from "chai";
 import camelCase from "../src/camelCase.js"
 
+console.log("camelCase source:", camelCase.toString())
 describe("camelCase.js", () => {
   /**
    * Tests for the camelCase() function
+   * @module __test__/camelCase.test.js
    */
   describe("camelCase()", () => {
     /**
