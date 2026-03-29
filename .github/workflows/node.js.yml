@@ -30,7 +30,7 @@ jobs:
         run: npm install
 
       - name: Run tests and generate coverage
-        working-directory: working-directory: VIII_Deployment
+        working-directory: VIII_Deployment
         run: npm run coverage
 
       - name: Send coverage to Coveralls
