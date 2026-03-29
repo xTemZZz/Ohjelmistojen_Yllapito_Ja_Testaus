@@ -102,9 +102,13 @@ Testeissä hyödynnettiin koodin mukana annettuja esimerkkejä, ja niiden lisäk
 ### Testauksen tulokset 
 
 ### Testi kattavuus: 98.23%
-**537 / 583 haarakattavuus (92,11 %)**
-**Haarakattavuus sisältyy kokonaisprosenttiin.**
-**3135 / 3155 rivikattavuus (99,37 %)**
+
+**537 / 583 haarakattavuus (92,11 %)**  
+
+**Haarakattavuus sisältyy kokonaisprosenttiin.**  
+
+**3135 / 3155 rivikattavuus (99,37 %)**  
+
 **1,64 osumaa per rivi**
 
 Testien suorittamisen jälkeen saavutettiin yli 60 % testikattavuus, kun .internal-kansio jätettiin pois. Alla on yhteenveto testatuista ja testaamattomista tiedostoista sekä mahdollisista löydetyistä ongelmista:
