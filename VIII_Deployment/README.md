@@ -139,13 +139,18 @@ Workflow käynnistyy automaattisesti, kun muutoksia tehdään VIII_Deployment/-k
 Workflow voidaan myös käynnistää manuaalisesti GitHubin käyttöliittymästä (`workflow_dispatch`).
 
 ## CI-putken vaiheet:
-Checkout – Lataa repositorion työympäristöön (`actions/checkout@v5`).
-Node.js asennus – Asennetaan Node.js 24.x (`actions/setup-node@v3`).
-Riippuvuuksien asennus – Asennetaan npm-riippuvuudet VIII_Deployment-kansiosta (`npm install`).
-Testien suoritus ja kattavuus – Ajetaan testit ja generoidaan kattavuustiedot (`npm run coverage`).
-Kattavuuden lähetys Coverallsille – Lähetetään LCOV-raportti Coveralls-palveluun (`coverallsapp/github-action@v2`).
+Checkout – Lataa repositorion työympäristöön (`actions/checkout@v5`).  
 
-- Käyttöjärjestelmä: Ubuntu 24.04 (uusin LTS) (OPETTAJAN TOIVOMUKSEN MUKAISESTI)
+Node.js asennus – Asennetaan Node.js 24.x (`actions/setup-node@v3`).  
+
+Riippuvuuksien asennus – Asennetaan npm-riippuvuudet VIII_Deployment-kansiosta (`npm install`).  
+
+Testien suoritus ja kattavuus – Ajetaan testit ja generoidaan kattavuustiedot (`npm run coverage`).  
+
+Kattavuuden lähetys Coverallsille – Lähetetään LCOV-raportti Coveralls-palveluun (`coverallsapp/github-action@v2`).  
+
+
+- Käyttöjärjestelmä: Ubuntu 24.04 (uusin LTS) (OPETTAJAN TOIVOMUKSEN MUKAISESTI)  
 - Node.js-versio: 24.x (uusin saatavilla oleva versio)
 - actions/checkout: versio v5
 
