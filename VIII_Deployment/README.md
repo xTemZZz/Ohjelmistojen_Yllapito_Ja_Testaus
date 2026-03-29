@@ -38,6 +38,8 @@ VIII_Deployment/
 └─ README.md
 ```
 
+Projektin koodi on jaettu moduuleihin src/-kansiossa, joissa jokainen tiedosto (add.js, at.js jne.) vastaa yhtä loogista toimintoa. Tämä mahdollistaa koodin uudelleenkäytön ja helpottaa ylläpitoa. Testit on sijoitettu __test__/-hakemistoon, jotta saadaan testit selvästi erotettua tuotantokoodista. Sisäiset apufunktiot on piilotettu .internal/-hakemistoon, eikä niitä oteta mukaan testauksen kattavuuteen.
+
 ---
 
 ## Lähestymistapa ja toteutus
@@ -46,7 +48,9 @@ VIII_Deployment/
 Testaus aloitettiin analysoimalla kirjaston rakenne ja sen tarjoamat funktiot, tavoitteena saada koodin testikattavuus yli 60 %. Projektissa suunniteltiin testit jokaiselle moduulille, huomioiden sekä normaali- että virhetilanteet. .internal-kansio jätettiin testauksesta pois tehtävänannon mukaisesti, koska se on tarkoitettu vain kirjaston sisäiseen käyttöön.
 
 ### Testaus 
-Alla on luettelo testatuista funktioista, niiden vastaavista testitiedostoista, sekä tieto siitä, toimiiko kirjasto ladattaessa. Mikäli kirjasto ei toiminut odotetusti, taulukossa on myös linkki löydettyyn bugiin
+Alla on luettelo testatuista funktioista, niiden vastaavista testitiedostoista, sekä tieto siitä, toimiiko kirjasto ladattaessa oikein. Mikäli kirjasto ei toiminut odotetusti, taulukossa on myös linkki issue reportiin, jossa kuvataan ongelma ja onko sille tehty mitään.
+
+Testeissä hyödynnettiin koodin mukana annettuja esimerkkejä, ja niiden lisäksi suoritettiin testauksia myös virheellisillä arvoilla sekä erilaisilla rajatapauksilla.
 
 | FUNKTIO | TESTI | TOIMIVUUS | ISSUE REPORT |   KORJATTU | 
 |----------|--------------|--------------|-----------------|-----------------|
@@ -94,22 +98,33 @@ Alla on luettelo testatuista funktioista, niiden vastaavista testitiedostoista, 
 | [upperFirst.js](https://github.com/xTemZZz/Ohjelmistojen_Yllapito_Ja_Testaus/blob/main/VIII_Deployment/src/upperFirst.js) | [upperFirst.test.js](https://github.com/xTemZZz/Ohjelmistojen_Yllapito_Ja_Testaus/blob/main/VIII_Deployment/__test__/upperFirst.test.js) | ❌ | [issueToString](https://github.com/xTemZZz/Ohjelmistojen_Yllapito_Ja_Testaus/blob/main/VIII_Deployment/issues/IssueToString.md) | ✔️ |
 | [words.js](https://github.com/xTemZZz/Ohjelmistojen_Yllapito_Ja_Testaus/blob/main/VIII_Deployment/src/words.js) | [words.test.js](https://github.com/xTemZZz/Ohjelmistojen_Yllapito_Ja_Testaus/blob/main/VIII_Deployment/__test__/words.test.js) | ✔️ | 
 
-### Testauksen tulokset - 98% coverage
+### Testauksen tulokset 
+
+### Testi kattavuus: 98.23%
+**537 / 583 haarakattavuus (92,11 %)**
+**Haarakattavuus sisältyy kokonaisprosenttiin.**
+**3135 / 3155 rivikattavuus (99,37 %)**
+**1,64 osumaa per rivi**
 
 Testien suorittamisen jälkeen saavutettiin yli 60 % testikattavuus, kun .internal-kansio jätettiin pois. Alla on yhteenveto testatuista ja testaamattomista tiedostoista sekä mahdollisista löydetyistä ongelmista:
 
 Testatut tiedostot: kaikki kirjaston mukana tulleet tiedostot. isBuffer() testit on skipattu, samoin keys()-funktion testi string-arvoilla.
 Testaamatta jätetyt tiedostot: .internal/ -kansion sisältö
 Löydetyt ongelmat ja issue-raportit on dokumentoitu ylläolevassa listassa.
-Suurin osa issueista on korjattu testauksen aikana, mutta esimerkiksi defaultToAny.js ja keys.js sisältävät vielä avoimia ongelmia.
+Suurin osa issueista on korjattu testauksen aikana, mutta esimerkiksi defaultToAny.js ja keys.js sisältävät vielä ongelmia.
 
 ### Screenshot Coveralls:
 <img width="1182" height="884" alt="image" src="https://github.com/user-attachments/assets/7ccdd75f-792c-455d-8246-d55c0fa60862" />
 
+## Screenshot Coverage:
+<img width="781" height="814" alt="image" src="https://github.com/user-attachments/assets/a5795f33-ab13-41a6-9d8f-a5ff5cb7a70c" />
+
+Tiedoston ylälaidassa näkyvä Coveralls-badge päivittyy automaattisesti jokaisen pushin jälkeen ja näyttää reaaliaikaisesti testikattavuuden.
+
 ---
 
 ## GitHub Actions
----
+
 <img width="890" height="815" alt="image" src="https://github.com/user-attachments/assets/324e8940-c88f-4917-8f65-5033f396aae0" />
 
 Tämä projekti käyttää GitHub Actions -workflowta automaattiseen testaukseen ja kattavuusraportointiin.
@@ -129,7 +144,16 @@ Kattavuuden lähetys Coverallsille – Lähetetään LCOV-raportti Coveralls-pal
 - Node.js-versio: 24.x (uusin saatavilla oleva versio)
 - actions/checkout: versio v5
 
+Workflowta on testattu useilla push- ja pull requesteilla, sekä workflow_dispatchilla.
 ---
+## Ongelmat projektin aikana
+
+Joidenkin kirjaston moduulien toiminta ei ollut täysin selvä, mikä teki niiden testaamisesta haastavaa, koska ei ollut varmaa, mitä tulisi testata.
+
+Toinen ongelma liittyi kattavuustyökaluun. Aluksi yritin käyttää nyc:tä, mutta sen kanssa tuli ongelmia, joita yritin ratkoa useiden tuntien ajan. Lopulta selvisi, että nyc ei sovellu tähän projektiin, joten siirryin käyttämään c8, joka toimi odotetulla tavalla.
+
+---
+
 ## Päätelmä
 
 Alkuperäinen kirjasto ei ollut täysin valmis tuotantoon. Testauksen aikana löytyi sekä kriittisiä että vähemmän kriittisiä virheitä useista moduuleista, joten kaikki toiminnot eivät olleet täysin luotettavia. 
@@ -153,13 +177,13 @@ npm install
 - Chai 6.2.2
 - Mocha 11.7.5
 
-### 2.1 Testien suorittaminen ilman coveragea
+### 2 Testien suorittaminen ilman coveragea
 
 ```bash
 npm test
 ```
 
-### 2.2 Testien suorittaminen kattavuuden kanssa
+### Testien suorittaminen kattavuuden kanssa
 
 ```bash
 npm run coverage
