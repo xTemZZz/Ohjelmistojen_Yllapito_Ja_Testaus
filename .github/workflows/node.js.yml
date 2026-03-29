@@ -1,40 +1,36 @@
-name: Task VIII_Deployment CI
+name: Node.js CI
 
 on:
   push:
-    branches: [ "main" ]
-    paths:
-      - 'VIII_Deployment/**'
-
+    branches: [main]
+    paths: 'VIII_Deployment/**'
   pull_request:
-    branches: [ "main" ]
-    paths:
-      - 'VIII_Deployment/**'
-
+    branches: [main]
+    paths: 'VIII_Deployment/**'
+    
 jobs:
-  build:
+  test:
     runs-on: ubuntu-24.04
 
     strategy:
       matrix:
-        node-version: [18.x, 20.x, 22.x]
+        node-version: [22.x]
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v3
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: npm ci
-        working-directory: VIII_Deployment
+        run: npm install
 
-      - name: Build
-        run: npm run build --if-present
-        working-directory: VIII_Deployment
+      - name: Run tests and generate coverage
+        run: npm run coverage
 
-      - name: Run tests with coverage
-        run: npm test
-        working-directory: VIII_Deployment
+      - name: Send coverage to Coveralls
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+        run: npm run coveralls
