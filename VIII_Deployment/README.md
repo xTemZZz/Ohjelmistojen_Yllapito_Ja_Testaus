@@ -94,7 +94,7 @@ Alla on luettelo testatuista funktioista, niiden vastaavista testitiedostoista, 
 | [upperFirst.js](https://github.com/xTemZZz/Ohjelmistojen_Yllapito_Ja_Testaus/blob/main/VIII_Deployment/src/upperFirst.js) | [upperFirst.test.js](https://github.com/xTemZZz/Ohjelmistojen_Yllapito_Ja_Testaus/blob/main/VIII_Deployment/__test__/upperFirst.test.js) | ❌ | [issueToString](https://github.com/xTemZZz/Ohjelmistojen_Yllapito_Ja_Testaus/blob/main/VIII_Deployment/issues/IssueToString.md) | ✔️ |
 | [words.js](https://github.com/xTemZZz/Ohjelmistojen_Yllapito_Ja_Testaus/blob/main/VIII_Deployment/src/words.js) | [words.test.js](https://github.com/xTemZZz/Ohjelmistojen_Yllapito_Ja_Testaus/blob/main/VIII_Deployment/__test__/words.test.js) | ✔️ | 
 
-### Testauksen tulokset 98% coverage
+### Testauksen tulokset - 98% coverage
 
 Testien suorittamisen jälkeen saavutettiin yli 60 % testikattavuus, kun .internal-kansio jätettiin pois. Alla on yhteenveto testatuista ja testaamattomista tiedostoista sekä mahdollisista löydetyistä ongelmista:
 
@@ -113,9 +113,9 @@ CI-putki on toteutettu GitHub Actionsilla. Workflow on määritelty siten, että
 
 Workflow käyttää seuraavia asetuksia:
 
-Käyttöjärjestelmä: Ubuntu 24.04 (uusin LTS) (OPETTAJAN TOIVOMUKSEN MUKAISESTI)
-Node.js-versio: 24.x (uusin saatavilla oleva versio)
-actions/checkout: versio v5
+- Käyttöjärjestelmä: Ubuntu 24.04 (uusin LTS) (OPETTAJAN TOIVOMUKSEN MUKAISESTI)
+- Node.js-versio: 24.x (uusin saatavilla oleva versio)
+- actions/checkout: versio v5
 
 ---
 ## Päätelmä
@@ -125,6 +125,7 @@ Alkuperäinen kirjasto ei ollut täysin valmis tuotantoon. Testauksen aikana lö
 Vaikka testit kattoivat koodin laajasti, ne eivät silti todennäköisesti paljasta kaikkia mahdollisia virheitä, joita kirjasto voi sisältää erilaisissa käyttötapauksissa. Suurin osa löydetyistä bugeista on kuitenkin nyt korjattu, mikä parantaa kirjaston luotettavuutta. Korjausten jälkeen kirjastoa voi käyttää ainakin osittain tuotannossa tai sisäisessä kehitystyössä, mutta ennen laajempaa käyttöönottoa kannattaa vielä lisätä testejä ja seurata mahdollisia uusia virheitä.
 
 Kirjasto tarjoaa toimintoja, joita voi hyödyntää rajatusti tuotannossa, mutta sen käyttöön liittyy edelleen riskejä, jotka on hyvä huomioida kehityksessä.
+
 ---
 
 ##  Käyttöohjeet
