@@ -45,11 +45,11 @@ VIII_Deployment/
 ```bash
 npm install
 ```
-Node v22.18.0
-npm 10.9.3
-c8 11.0.0
-chai 6.2.2
-mocha 11.7.5
+- Node v22.18.0
+- npm 10.9.3
+- c8 11.0.0
+- chai 6.2.2
+- mocha 11.7.5
 
 ### 2. Testien suorittaminen
 
