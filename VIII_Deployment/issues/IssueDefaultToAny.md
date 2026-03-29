@@ -1,4 +1,4 @@
-# defaultTo
+# defaultToAny
 
 ## Yhteenveto / Summary
 > defaultTo() -funktion kuvauksessa sanottiin: 'accepts multiple default values'. Toimi ainoastaan kahdella.
