@@ -36,4 +36,5 @@ jobs:
       - name: Send coverage to Coveralls
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+        working-directory: VIII_Deployment
         run: npm run coveralls
