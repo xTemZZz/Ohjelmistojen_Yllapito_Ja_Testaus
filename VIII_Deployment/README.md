@@ -103,15 +103,27 @@ Testaamatta jätetyt tiedostot: .internal/ -kansion sisältö
 Löydetyt ongelmat ja issue-raportit on dokumentoitu ylläolevassa listassa.
 Suurin osa issueista on korjattu testauksen aikana, mutta esimerkiksi defaultToAny.js ja keys.js sisältävät vielä avoimia ongelmia.
 
+### Screenshot Coveralls:
+<img width="1182" height="884" alt="image" src="https://github.com/user-attachments/assets/7ccdd75f-792c-455d-8246-d55c0fa60862" />
+
 ---
 
 ## GitHub Actions
 ---
 <img width="890" height="815" alt="image" src="https://github.com/user-attachments/assets/324e8940-c88f-4917-8f65-5033f396aae0" />
 
-CI-putki on toteutettu GitHub Actionsilla. Workflow on määritelty siten, että sen voi tarvittaessa käynnistää manuaalisesti (workflow_dispatch), eli testi voidaan ajaa myös ilman push- tai pull-request-tapahtumaa. Varsinainen automaatio aktivoituu ainoastaan VIII_Deployment-kansion muutoksia koskevissa push- ja pull-requesteissa.
+Tämä projekti käyttää GitHub Actions -workflowta automaattiseen testaukseen ja kattavuusraportointiin.
 
-Workflow käyttää seuraavia asetuksia:
+## Workflown toiminta
+Workflow käynnistyy automaattisesti, kun muutoksia tehdään VIII_Deployment/-kansioon push- tai pull requesteilla.
+Workflow voidaan myös käynnistää manuaalisesti GitHubin käyttöliittymästä (`workflow_dispatch`).
+
+## CI-putken vaiheet:
+Checkout – Lataa repositorion työympäristöön (`actions/checkout@v5`).
+Node.js asennus – Asennetaan Node.js 24.x (`actions/setup-node@v3`).
+Riippuvuuksien asennus – Asennetaan npm-riippuvuudet VIII_Deployment-kansiosta (`npm install`).
+Testien suoritus ja kattavuus – Ajetaan testit ja generoidaan kattavuustiedot (`npm run coverage`).
+Kattavuuden lähetys Coverallsille – Lähetetään LCOV-raportti Coveralls-palveluun (`coverallsapp/github-action@v2`).
 
 - Käyttöjärjestelmä: Ubuntu 24.04 (uusin LTS) (OPETTAJAN TOIVOMUKSEN MUKAISESTI)
 - Node.js-versio: 24.x (uusin saatavilla oleva versio)
