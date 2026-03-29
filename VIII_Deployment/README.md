@@ -150,7 +150,9 @@ Kattavuuden lähetys Coverallsille – Lähetetään LCOV-raportti Coveralls-pal
 - actions/checkout: versio v5
 
 Workflowta on testattu useilla push- ja pull requesteilla, sekä workflow_dispatchilla.
+
 ---
+
 ## Ongelmat projektin aikana
 
 Joidenkin kirjaston moduulien toiminta ei ollut täysin selvä, mikä teki niiden testaamisesta haastavaa, koska ei ollut varmaa, mitä tulisi testata.
