@@ -4,10 +4,10 @@ on:
   workflow_dispatch: 
   push:
     branches: [main]
-    paths: 'VIII_Deployment/**'
+   # paths: 'VIII_Deployment/**'
   pull_request:
     branches: [main]
-    paths: 'VIII_Deployment/**'
+   # paths: 'VIII_Deployment/**'
     
 jobs:
   test:
