@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-  "test": "c8 --reporter=lcov --reporter=text --exclude=src/.internal/ mocha __test__/*.js",
+  "test": "mocha __test__/*.js",
+  "test:one": "mocha",
   "coverage": "c8 --reporter=lcov --reporter=text --exclude=src/.internal/** mocha __test__/*.js",
   "coveralls": "npx coveralls < coverage/lcov.info"
   },

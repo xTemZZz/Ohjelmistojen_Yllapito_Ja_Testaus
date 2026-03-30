@@ -115,7 +115,18 @@ Listassa alla on testatutut funktiot, niiden testit, oliko kirjasto ehjä ladate
 
 ##  Käyttöohjeet
 
-### 1. Riippuvuuksien asentaminen
+### 1. Deployment kansion kloonaus 
+
+```bash
+git clone --depth 1 --filter=blob:none --sparse https://github.com/xTemZZz/Ohjelmistojen_Yllapito_Ja_Testaus.git && cd Ohjelmistojen_Yllapito_Ja_Testaus && git sparse-checkout set VIII_Deployment
+```
+
+Voit myös halutessasi kloonata koko repositorin
+```bash
+git clone https://github.com/xTemZZz/Ohjelmistojen_Yllapito_Ja_Testaus/tree/main
+```
+
+### 2. Riippuvuuksien asentaminen
 
 ```bash
 npm install
@@ -136,6 +147,12 @@ npm test
 
 ```bash
 npm run coverage
+```
+
+### 2.3 Yksittäisten testien suorittaminen
+
+```bash
+npm run test:one __test__/funktionNimi.test.js
 ```
 
 ---
