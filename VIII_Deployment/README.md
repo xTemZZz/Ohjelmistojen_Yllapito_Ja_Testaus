@@ -13,27 +13,23 @@ Projektin tavoitteena oli:
 3. Toteuttaa GitHub Actions workflow, joka ajaa testit automaattisesti.  
 4. Integroida kattavuusraportointi Coverallsiin.
 5. Dokumentoida toteutus ja raportoida mahdolliset virheet  
-
 ---
-## Lähestymistapa ja toteutus
-
-# Testauksen suunnittelu
-Testaus aloitettiin tarkastelemalla annettua kirjastoa. 
 
 ## Tiedostojen rakenne
 ```
 VIII_Deployment/
 ├─ __test__/
-│  ├─ test1.js
-│  ├─ test2.js
-│  └─ test3.js
-│  └─ testN.js
+│  ├─ add.test.js
+│  ├─ at.test.js
+│  └─ camelCase.test.js
+│  └─...
+│  └─ words.test.js
 ├─ coverage/
 ├─ node_modules/
 ├─ src/
-│  ├─ module1.js
-│  ├─ module2.js
-│  ├─ module3.js
+│  ├─ add.js
+│  ├─ at.js
+│  ├─ camelCase.js
 │  └─ ...
 │  └─ .internal/      * Ei vaikuta koodin testauksen kattavuuteen
 ├─ .gitignore
@@ -43,28 +39,19 @@ VIII_Deployment/
 └─ README.md
 ```
 
-
-## GitHub Actions
----
-<img width="890" height="815" alt="image" src="https://github.com/user-attachments/assets/324e8940-c88f-4917-8f65-5033f396aae0" />
-
-CI putki on toteutettu projektissa github actionsilla. 
-
-workflow_dispatch - testausta varten lisätty, voi ajaa actionsin ilman push / pull
-Actions aktivoituu ainoastaan VIII_deployment kohdistuviin pull ja push requesteihin
-Valittiin ubuntu 24.04 koska se on uusin LTS
-node versioksi otettiin uusin 24.x versio
-actions/checkout uusin v5
-
-askeleet: 
-- Asennetaan riippuvuudet, erikseen määritelty, että tapahtuu VIII_Deployment kansiossa komennolla npm install
-- Käydään testit ja coverage läpi komennolla npm run coverage
-- Lähetetään kattavuusraportti Coverallsille
-
+Projektin koodi on jaettu moduuleihin src/-kansiossa, joissa jokainen tiedosto (add.js, at.js jne.) vastaa yhtä loogista toimintoa. Tämä mahdollistaa koodin uudelleenkäytön ja helpottaa ylläpitoa. Testit on sijoitettu __test__/-hakemistoon, jotta saadaan testit selvästi erotettua tuotantokoodista. Sisäiset apufunktiot on piilotettu .internal/-hakemistoon, eikä niitä oteta mukaan testauksen kattavuuteen.
 
 ---
-## Testaus 
-Listassa alla on testatutut funktiot, niiden testit, oliko kirjasto ehjä ladatessa, jos ei mikä bugi niissä oli
+
+## Lähestymistapa ja toteutus
+
+### Testauksen suunnittelu
+Testaus aloitettiin analysoimalla kirjaston rakenne ja sen tarjoamat funktiot, tavoitteena saada koodin testikattavuus yli 60 %. Projektissa suunniteltiin testit jokaiselle moduulille, huomioiden sekä normaali- että virhetilanteet. .internal-kansio jätettiin testauksesta pois tehtävänannon mukaisesti, koska se on tarkoitettu vain kirjaston sisäiseen käyttöön.
+
+### Testaus 
+Alla on luettelo testatuista funktioista, niiden vastaavista testitiedostoista, sekä tieto siitä, toimiiko kirjasto ladattaessa oikein. Mikäli kirjasto ei toiminut odotetusti, taulukossa on myös linkki issue reportiin, jossa kuvataan ongelma ja onko sille tehty mitään.
+
+Testeissä hyödynnettiin koodin mukana annettuja esimerkkejä, ja niiden lisäksi suoritettiin testauksia myös virheellisillä arvoilla sekä erilaisilla rajatapauksilla.
 
 | FUNKTIO | TESTI | TOIMIVUUS | ISSUE REPORT |   KORJATTU | 
 |----------|--------------|--------------|-----------------|-----------------|
@@ -112,6 +99,82 @@ Listassa alla on testatutut funktiot, niiden testit, oliko kirjasto ehjä ladate
 | [upperFirst.js](https://github.com/xTemZZz/Ohjelmistojen_Yllapito_Ja_Testaus/blob/main/VIII_Deployment/src/upperFirst.js) | [upperFirst.test.js](https://github.com/xTemZZz/Ohjelmistojen_Yllapito_Ja_Testaus/blob/main/VIII_Deployment/__test__/upperFirst.test.js) | ❌ | [issueToString](https://github.com/xTemZZz/Ohjelmistojen_Yllapito_Ja_Testaus/blob/main/VIII_Deployment/issues/IssueToString.md) | ✔️ |
 | [words.js](https://github.com/xTemZZz/Ohjelmistojen_Yllapito_Ja_Testaus/blob/main/VIII_Deployment/src/words.js) | [words.test.js](https://github.com/xTemZZz/Ohjelmistojen_Yllapito_Ja_Testaus/blob/main/VIII_Deployment/__test__/words.test.js) | ✔️ | 
 
+### Testauksen tulokset 
+
+### Testi kattavuus: 98.23%
+
+**537 / 583 haarakattavuus (92,11 %)**  
+
+**Haarakattavuus sisältyy kokonaisprosenttiin.**  
+
+**3135 / 3155 rivikattavuus (99,37 %)**  
+
+**1,64 osumaa per rivi**
+
+Testien suorittamisen jälkeen saavutettiin yli 60 % testikattavuus, kun .internal-kansio jätettiin pois. Alla on yhteenveto testatuista ja testaamattomista tiedostoista sekä mahdollisista löydetyistä ongelmista:
+
+Testatut tiedostot: kaikki kirjaston mukana tulleet tiedostot. isBuffer() testit on skipattu, samoin keys()-funktion testi string-arvoilla.
+Testaamatta jätetyt tiedostot: .internal/ -kansion sisältö
+Löydetyt ongelmat ja issue-raportit on dokumentoitu ylläolevassa listassa.
+Suurin osa issueista on korjattu testauksen aikana, mutta esimerkiksi defaultToAny.js ja keys.js sisältävät vielä ongelmia.
+
+### Screenshot Coveralls:
+<img width="1182" height="884" alt="image" src="https://github.com/user-attachments/assets/7ccdd75f-792c-455d-8246-d55c0fa60862" />
+
+## Screenshot Coverage:
+<img width="781" height="814" alt="image" src="https://github.com/user-attachments/assets/a5795f33-ab13-41a6-9d8f-a5ff5cb7a70c" />
+
+Tiedoston ylälaidassa näkyvä Coveralls-badge päivittyy automaattisesti jokaisen pushin jälkeen ja näyttää reaaliaikaisesti testikattavuuden.
+
+---
+
+## GitHub Actions
+
+<img width="890" height="815" alt="image" src="https://github.com/user-attachments/assets/324e8940-c88f-4917-8f65-5033f396aae0" />
+
+Tämä projekti käyttää GitHub Actions -workflowta automaattiseen testaukseen ja kattavuusraportointiin.
+
+## Workflown toiminta
+Workflow käynnistyy automaattisesti, kun muutoksia tehdään VIII_Deployment/-kansioon push- tai pull requesteilla.
+Workflow voidaan myös käynnistää manuaalisesti GitHubin käyttöliittymästä (`workflow_dispatch`).
+
+## CI-putken vaiheet:
+Checkout – Lataa repositorion työympäristöön (`actions/checkout@v5`).  
+
+Node.js asennus – Asennetaan Node.js 24.x (`actions/setup-node@v3`).  
+
+Riippuvuuksien asennus – Asennetaan npm-riippuvuudet VIII_Deployment-kansiosta (`npm install`).  
+
+Testien suoritus ja kattavuus – Ajetaan testit ja generoidaan kattavuustiedot (`npm run coverage`).  
+
+Kattavuuden lähetys Coverallsille – Lähetetään LCOV-raportti Coveralls-palveluun (`coverallsapp/github-action@v2`).  
+
+
+- Käyttöjärjestelmä: Ubuntu 24.04 (uusin LTS) (OPETTAJAN TOIVOMUKSEN MUKAISESTI)  
+- Node.js-versio: 24.x (uusin saatavilla oleva versio)
+- actions/checkout: versio v5
+
+Workflowta on testattu useilla push- ja pull requesteilla, sekä workflow_dispatchilla.
+
+---
+
+## Ongelmat projektin aikana
+
+Joidenkin kirjaston moduulien toiminta ei ollut täysin selvä, mikä teki niiden testaamisesta haastavaa, koska ei ollut varmaa, mitä tulisi testata.
+
+Toinen ongelma liittyi kattavuustyökaluun. Aluksi yritin käyttää nyc:tä, mutta sen kanssa tuli ongelmia, joita yritin ratkoa useiden tuntien ajan. Lopulta selvisi, että nyc ei sovellu tähän projektiin, joten siirryin käyttämään c8, joka toimi odotetulla tavalla.
+
+---
+
+## Päätelmä
+
+Alkuperäinen kirjasto ei ollut täysin valmis tuotantoon. Testauksen aikana löytyi sekä kriittisiä että vähemmän kriittisiä virheitä useista moduuleista, joten kaikki toiminnot eivät olleet täysin luotettavia. 
+
+Vaikka testit kattoivat koodin laajasti, ne eivät silti todennäköisesti paljasta kaikkia mahdollisia virheitä, joita kirjasto voi sisältää erilaisissa käyttötapauksissa. Suurin osa löydetyistä bugeista on kuitenkin nyt korjattu, mikä parantaa kirjaston luotettavuutta. Korjausten jälkeen kirjastoa voi käyttää ainakin osittain tuotannossa tai sisäisessä kehitystyössä, mutta ennen laajempaa käyttöönottoa kannattaa vielä lisätä testejä ja seurata mahdollisia uusia virheitä.
+
+Kirjasto tarjoaa toimintoja, joita voi hyödyntää rajatusti tuotannossa, mutta sen käyttöön liittyy edelleen riskejä, jotka on hyvä huomioida kehityksessä.
+
+---
 
 ##  Käyttöohjeet
 
@@ -137,13 +200,13 @@ npm install
 - Chai 6.2.2
 - Mocha 11.7.5
 
-### 2.1 Testien suorittaminen ilman coveragea
+### 2 Testien suorittaminen ilman coveragea
 
 ```bash
 npm test
 ```
 
-### 2.2 Testien suorittaminen kattavuuden kanssa
+### Testien suorittaminen kattavuuden kanssa
 
 ```bash
 npm run coverage
